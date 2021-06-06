@@ -1,21 +1,52 @@
 package com.example.home_work02;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.os.Parcel;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.button.MaterialButton;
 
 
 public class MainActivity extends AppCompatActivity {
+    static String operator = "0";
     private Calculator calc;
     private EditText text;
-    static String operator = "0";
+    public View.OnClickListener numberButtonsClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            MaterialButton tv = (MaterialButton) v;
+            String textFromTV = tv.getText().toString();
+            text.append(textFromTV);
+        }
+    };
+    public View.OnClickListener numberClearClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            text.setText("");
+            calc.number2 = "";
+            calc.number1 = "";
+            calc.result = 0;
+        }
+    };
+    public View.OnClickListener returnButtonsClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String str = text.getText().toString().trim();
+            if (str.length() == 0) return;
+            str = str.substring(0, str.length() - 1);
+            text.setText(str);
+        }
+    };
+    public View.OnClickListener operationPlusButtonsClickListener = v -> setOperator("+");
+    public View.OnClickListener operationMinButtonsClickListener = v -> setOperator("-");
+    public View.OnClickListener operationDivButtonsClickListener = v -> setOperator("/");
+    public View.OnClickListener operationMultButtonsClickListener = v -> setOperator("*");
+    public View.OnClickListener operationProcButtonsClickListener = v -> setOperator("%");
+    public View.OnClickListener equalButtonsClickListener = v -> Equals();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,47 +101,6 @@ public class MainActivity extends AppCompatActivity {
         button_equal.setOnClickListener(equalButtonsClickListener);
     }
 
-    public View.OnClickListener numberButtonsClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            EditText tv = (EditText) v;
-            String textFromTV = tv.getText().toString();
-            text.append(textFromTV);
-        }
-    };
-
-    public View.OnClickListener numberClearClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            text.setText("");
-            calc.number2 = "";
-            calc.number1 = "";
-            calc.result = 0;
-        }
-    };
-
-    public View.OnClickListener returnButtonsClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String str = text.getText().toString().trim();
-            if (str.length() == 0) return;
-            str = str.substring(0, str.length() - 1);
-            text.setText(str);
-        }
-    };
-
-    public View.OnClickListener operationPlusButtonsClickListener = v -> setOperator("+");
-
-    public View.OnClickListener operationMinButtonsClickListener = v -> setOperator("-");
-
-    public View.OnClickListener operationDivButtonsClickListener = v -> setOperator("/");
-
-    public View.OnClickListener operationMultButtonsClickListener = v -> setOperator("*");
-
-    public View.OnClickListener operationProcButtonsClickListener = v -> setOperator("%");
-
-    public View.OnClickListener equalButtonsClickListener = v -> Equals();
-
     public void setOperator(String _operator) {
         if (calc.number1.equals("")) {
             calc.number1 = text.getText().toString().trim();
@@ -122,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         text.setText("");
 
     }
+
 
     public void Equals() {
         String str = text.getText().toString().trim();
@@ -149,16 +140,13 @@ public class MainActivity extends AppCompatActivity {
                 calc.Mult();
                 break;
 
-            case "%":
-                calc.Proc();
-                break;
 
             default:
                 calc.result = 0;
         }
 
         text.setText("" + calc.result);
-        //textOperation.setText("");
+
     }
 
     @Override
