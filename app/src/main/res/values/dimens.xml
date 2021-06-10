@@ -5,4 +5,5 @@
     <dimen name="radiusBtn">23dp</dimen>
     <dimen name="widthBtn">0dp</dimen>
     <dimen name="width_EdTxt">0dp</dimen>
+    <dimen name="sizeTxtThemeMain">20sp</dimen>
 </resources>

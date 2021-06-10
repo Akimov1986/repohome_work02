@@ -155,5 +155,33 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingClass" />
 
+    <RadioGroup
+        android:id="@+id/radioButtons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints"/>
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/radioButtonDarkAction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnDarkText"
+        android:textSize="@dimen/txt_size"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX= "40dp"/>
+
+    <com.google.android.material.radiobutton.MaterialRadioButton
+        android:id="@+id/rBtnLight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/rBtnLightText"
+        android:textSize="@dimen/txt_size"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX= "40dp"
+        app:layout_constraintTop_toBottomOf="@id/radioButtonDarkAction"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
